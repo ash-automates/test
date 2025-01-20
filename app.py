@@ -110,6 +110,28 @@ def new_article():
         return redirect(url_for('articles'))
     return render_template('articles/new.html')
 
+@app.route('/articles/edit/<int:article_id>', methods=['GET', 'POST'])
+def edit_article(article_id):
+    article = Articles.query.get_or_404(article_id)
+    if request.method == 'POST':
+        article.code = request.form['code']
+        article.name = request.form['name']
+        article.category = request.form['category']
+        article.stock_quantity = request.form['stock_quantity']
+        article.minimum_threshold = request.form['minimum_threshold']
+        article.location = request.form['location']
+        
+        db.session.commit()
+        return redirect(url_for('articles'))
+    return render_template('articles/edit.html', article=article)
+
+@app.route('/articles/delete/<int:article_id>', methods=['POST'])
+def delete_article(article_id):
+    article = Articles.query.get_or_404(article_id)
+    db.session.delete(article)
+    db.session.commit()
+    return redirect(url_for('articles'))
+
 @app.route('/stock')
 def stock():
     return render_template('stock/stock_tabs.html')

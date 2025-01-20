@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Ajouter un nouvel article</h2>
+
+<form method="POST" action="{{ url_for('new_article') }}">
+    <div>
+        <label for="code">Code:</label>
+        <input type="text" id="code" name="code" required>
+    </div>
+    <div>
+        <label for="name">Nom:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+        <label for="category">Catégorie:</label>
+        <input type="text" id="category" name="category">
+    </div>
+    <div>
+        <label for="stock_quantity">Quantité en stock:</label>
+        <input type="number" id="stock_quantity" name="stock_quantity" required>
+    </div>
+    <div>
+        <label for="minimum_threshold">Seuil minimum:</label>
+        <input type="number" id="minimum_threshold" name="minimum_threshold" required>
+    </div>
+    <div>
+        <label for="location">Emplacement:</label>
+        <input type="text" id="location" name="location">
+    </div>
+    <button type="submit">Ajouter</button>
+</form>
+{% endblock %}

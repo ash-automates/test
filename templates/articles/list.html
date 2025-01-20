@@ -51,9 +51,9 @@
                 <button class="btn-edit">
                     <a href="{{ url_for('edit_article', article_id=article.id) }}">&#x270E;</a>
                 </button>
-                <button class="btn-delete">
-                    <a href="{{ url_for('delete_article', article_id=article.id) }}">&#x1F5D1;</a>
-                </button>
+                <form method="POST" action="{{ url_for('delete_article', article_id=article.id) }}" style="display:inline;">
+                    <button type="submit" class="btn-delete">&#x1F5D1;</button>
+                </form>
             </td>
         </tr>
         {% endfor %}
