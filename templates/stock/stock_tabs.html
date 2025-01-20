@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Gestion de Stock</h2>
+
+<div class="tabs">
+    <button onclick="location.href='{{ url_for('stock_movements') }}'" class="tab-button">Mouvements de Stock</button>
+    <button onclick="location.href='{{ url_for('inventory_main') }}'" class="tab-button">Inventaire</button>
+</div>
+
+<div class="tab-content">
+    <p>Sélectionnez un onglet pour afficher les informations.</p>
+</div>
+{% endblock %}

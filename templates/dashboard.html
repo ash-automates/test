@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Tableau de Bord</h2>
+
+<div class="dashboard">
+    <div class="dashboard-card">
+        <h2>Total Articles</h2>
+        <p>{{ total_articles }}</p>
+    </div>
+    <div class="dashboard-card">
+        <h2>Valeur de Stock</h2>
+        <p>{{ total_stock }} unités</p>
+    </div>
+    <div class="dashboard-card">
+        <h2>Articles Critiques</h2>
+        <p>{{ critical_articles | length }}</p>
+    </div>
+    <div class="dashboard-card">
+        <h2>Fournisseurs</h2>
+        <p>{{ suppliers_count }}</p>
+    </div>
+</div>
+
+<div class="recent-activities">
+    <h3>Activités Récentes</h3>
+    <ul>
+        {% for movement in recent_movements %}
+        <li>{{ movement.movement_date }} - {{ movement.movement_type }}: {{ movement.quantity }} unités (Article: {{ movement.article_id }})</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="alert">
+    <p>Alerte: Certains articles sont en dessous du seuil critique!</p>
+</div>
+{% endblock %}
+

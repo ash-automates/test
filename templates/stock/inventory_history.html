@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Historique</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Référence</th>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Articles</th>
+            <th>Écarts</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in inventory_data %}
+        <tr>
+            <td>{{ data.inventory.id }}</td>
+            <td>{{ data.inventory.inventory_date }}</td>
+            <td>{{ data.inventory.inventory_type }}</td>
+            <td>{{ data.total_articles }}</td>
+            <td>{{ data.discrepancies }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

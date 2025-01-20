@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Gestion des Articles</h2>
+
+<div class="article-actions">
+    <button class="btn-add-article">
+        <a href="{{ url_for('new_article') }}">
+            + Ajouter un article
+        </a>
+    </button>
+</div>
+
+<div class="search-bar">
+    <input type="text" placeholder="Hinted search text" class="search-input">
+    <button class="btn-search">
+        <span>&#x1F50D;</span>
+    </button>
+</div>
+
+<div class="category-filter">
+    <label for="categories">Catégories:</label>
+    <select id="categories" class="select-category">
+        <option value="">Toutes les catégories</option>
+        <!-- Dynamic categories (if needed) -->
+    </select>
+</div>
+
+<table class="articles-table">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Désignation</th>
+            <th>Catégorie</th>
+            <th>Stock</th>
+            <th>Min</th>
+            <th>Emplacement</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for article in articles %}
+        <tr>
+            <td>{{ article.code }}</td>
+            <td>{{ article.name }}</td>
+            <td>{{ article.category }}</td>
+            <td>{{ article.stock_quantity }}</td>
+            <td>{{ article.minimum_threshold }}</td>
+            <td>{{ article.location }}</td>
+            <td>
+                <button class="btn-edit">
+                    <a href="{{ url_for('edit_article', article_id=article.id) }}">&#x270E;</a>
+                </button>
+                <button class="btn-delete">
+                    <a href="{{ url_for('delete_article', article_id=article.id) }}">&#x1F5D1;</a>
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

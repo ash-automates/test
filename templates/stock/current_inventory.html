@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Inventaire en cours</h2>
+
+<!-- Summary Boxes -->
+<div class="summary-boxes">
+    <div class="summary-box green">
+        <h3>Comptés</h3>
+        <p>{{ total_comptes }}</p>
+    </div>
+    <div class="summary-box red">
+        <h3>Écarts</h3>
+        <p>{{ total_ecarts }}</p>
+    </div>
+</div>
+
+<!-- Inventory Table -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Article</th>
+            <th>Stock Théorique</th>
+            <th>Comptage</th>
+            <th>Écart</th>
+            <th>Statut</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in inventory_data %}
+            {% for item in data.items %}
+            <tr>
+                <td>{{ item.article_id }}</td>
+                <td>{{ item.recorded_quantity }}</td>
+                <td>{{ item.actual_quantity }}</td>
+                <td>{{ item.actual_quantity - item.recorded_quantity }}</td>
+                <td>
+                    {% if item.actual_quantity >= item.recorded_quantity %}
+                    <span class="status green">✅</span>
+                    {% else %}
+                    <span class="status red">⚠️</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Historique des Mouvements</h2>
+
+<div class="filter-buttons">
+    <!-- Filter buttons with query string -->
+    <button class="btn-green" onclick="location.href='{{ url_for('stock_movements', type='Entrée') }}'">
+        Entrée Stock
+    </button>
+    <button class="btn-red" onclick="location.href='{{ url_for('stock_movements', type='Sortie') }}'">
+        Sortie Stock
+    </button>
+</div>
+
+<!-- Date Filter -->
+<div class="date-filter">
+    <form method="get" action="{{ url_for('stock_movements') }}">
+        <label for="date">Sélectionner une date:</label>
+        <input type="date" id="date" name="date" value="{{ filter_date or '' }}">
+        <button type="submit" class="btn-filter">Filtrer</button>
+    </form>
+</div>
+
+<!-- Filtered Table -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Article</th>
+            <th>Motif</th>
+            <th>Quantités</th>
+            <th>Stock Final</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for movement in movements %}
+        <tr>
+            <td>{{ movement.movement_date }}</td>
+            <td>{{ movement.movement_type }}</td>
+            <td>{{ movement.article_id }}</td>
+            <td>{{ movement.reason }}</td>
+            <td>{{ movement.quantity }}</td>
+            <td><!-- Placeholder for stock final if applicable --></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Show active filters -->
+<div class="active-filters">
+    {% if filter_type %}
+    <p>Filtré par type: <strong>{{ filter_type }}</strong></p>
+    {% endif %}
+    {% if filter_date %}
+    <p>Filtré par date: <strong>{{ filter_date }}</strong></p>
+    {% endif %}
+</div>
+{% endblock %}
